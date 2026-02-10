@@ -67,46 +67,60 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize with first tab
     mockBody.innerHTML = sandboxData.finanzas;
 
-    // 3. NLP Conversational UI Logic (Simulated)
-    const nlpInput = document.getElementById('nlp-input');
-    const nlpBtn = document.getElementById('nlp-search');
-    const nlpResponse = document.getElementById('nlp-response');
+    // 5. Chat Assistant Logic
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatWindow = document.getElementById('chat-window');
+    const closeChat = document.getElementById('close-chat');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
+    const chatMessages = document.getElementById('chat-messages');
 
-    const responses = {
-        'inventario': 'Generando vista de Inventario Predictivo... He detectado 3 cuellos de botella en tu cadena de suministro. ¿Quieres ver el reporte de mitigación?',
-        'finanzas': 'Abriendo Dashboard Financiero Consolidado. Hemos procesado $4.2B este trimestre con un 99.9% de precisión en conciliación.',
-        'manufactura': 'Cargando visualización de Planta 4. La eficiencia (OEE) promedio actual es del 92%. Se recomienda optimizar la Línea B.',
-        'default': 'Entiendo tu consulta. Estoy generando una vista personalizada basada en los datos de tu industria. Un momento...'
+    const chatResponses = {
+        'precio': 'MODULR ofrece planes flexibles basados en módulos. Puedes empezar desde $49/mes. ¿Te gustaría ver la tabla comparativa?',
+        'modulos': 'Tenemos módulos de Finanzas, CRM, Inventario, Ventas, Manufactura y RRHH. Todos integrados nativamente.',
+        'implementacion': 'Nuestra implementación promedio tarda solo 2 semanas gracias a nuestra arquitectura modular pre-configurada.',
+        'seguridad': 'Contamos con encriptación AES-256 y cumplimos con normativas ISO 27001 y SOC 2.',
+        'demo': '¡Genial! Puedes agendar una demo directamente pulsando el botón verde en mi ventana o en la página de contacto.',
+        'default': 'Interesante pregunta. Como IA de MODULR, puedo decirte que nuestra plataforma se adapta a cualquier industria. ¿Quieres hablar con un experto?'
     };
 
-    const handleNLP = () => {
-        const query = nlpInput.value.toLowerCase();
-        nlpResponse.innerHTML = '<p style="color: var(--accent);">IA Procesando...</p>';
+    const addChatMessage = (text, sender) => {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${sender}`;
+        msgDiv.innerText = text;
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
 
-        let found = false;
+    const handleChatQuery = () => {
+        const query = chatInput.value.trim().toLowerCase();
+        if (!query) return;
+
+        addChatMessage(chatInput.value, 'user');
+        chatInput.value = '';
+
         setTimeout(() => {
-            for (const key in responses) {
+            let foundResponse = chatResponses.default;
+            for (const key in chatResponses) {
                 if (query.includes(key)) {
-                    nlpResponse.innerHTML = `
-                        <div style="border-left: 2px solid var(--accent); padding-left: 1rem;">
-                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Respuesta de MODULR IA:</p>
-                            <p>${responses[key]}</p>
-                            <button class="btn btn-primary" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.8rem;">Ver Detalles</button>
-                        </div>
-                    `;
-                    found = true;
+                    foundResponse = chatResponses[key];
                     break;
                 }
             }
-            if (!found) {
-                nlpResponse.innerHTML = `<p>${responses.default}</p>`;
-            }
-        }, 800);
+            addChatMessage(foundResponse, 'ai');
+        }, 600);
     };
 
-    nlpBtn.addEventListener('click', handleNLP);
-    nlpInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleNLP();
+    chatToggle.addEventListener('click', () => {
+        chatWindow.classList.toggle('active');
+        const badge = document.querySelector('.chat-badge');
+        if (badge) badge.style.display = 'none';
+    });
+
+    closeChat.addEventListener('click', () => chatWindow.classList.remove('active'));
+    chatSend.addEventListener('click', handleChatQuery);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleChatQuery();
     });
     // 4. Modal Booking Logic
     const bookingModal = document.getElementById('booking-modal');

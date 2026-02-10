@@ -132,24 +132,32 @@
             </div>
         </section>
 
-        <!-- NLP Conversational UI -->
-        <section id="tecnologia" class="nlp-section container">
-            <div class="nlp-card reveal">
-                <div class="nlp-header">
-                    <span class="nlp-ai-icon">✨</span>
-                    <h3>Interfaz Conversacional</h3>
+        <!-- Floating Chat Widget -->
+        <div id="chat-widget" class="chat-widget">
+            <button id="chat-toggle" class="chat-toggle">
+                <span class="chat-icon">✨</span>
+                <span class="chat-badge">1</span>
+            </button>
+            <div id="chat-window" class="chat-window glassmorphism">
+                <div class="chat-header">
+                    <div class="chat-ai-status">
+                        <span class="status-dot"></span>
+                        <strong>MODULR IA</strong>
+                    </div>
+                    <button id="close-chat">&times;</button>
                 </div>
-                <div class="nlp-input-wrapper">
-                    <input type="text" id="nlp-input"
-                        placeholder="Pregunta: '¿Cómo manejamos los inventarios en tiempo real?'">
-                    <button id="nlp-search">Consultar</button>
+                <div id="chat-messages" class="chat-messages">
+                    <div class="message ai">
+                        ¡Hola! Soy el asistente inteligente de MODULR. ¿En qué puedo ayudarte hoy con tu gestión
+                        empresarial?
+                    </div>
                 </div>
-                <div id="nlp-response" class="nlp-response-area">
-                    <p class="placeholder-text">Escribe tu pregunta para generar una vista curada instantáneamente...
-                    </p>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Pregunta algo sobre el ERP...">
+                    <button id="chat-send">Siguiente</button>
                 </div>
             </div>
-        </section>
+        </div>
 
         <!-- Contact & Booking Section -->
         <section id="contacto" class="contact-section container">
@@ -182,63 +190,24 @@
         </section>
     </main>
 
-    <!-- Booking Modal -->
+    <!-- Booking Modal (Updated for Real Integration) -->
     <div id="booking-modal" class="modal">
-        <div class="modal-content glassmorphism">
+        <div class="modal-content glassmorphism wide">
             <button class="close-modal">&times;</button>
             <div class="modal-header">
                 <h2>Agendar Sesión estratégica</h2>
-                <p>Seleccione el horario que mejor se adapte a su equipo en nuestro Google Calendar.</p>
+                <p>Usa nuestro calendario oficial para elegir tu horario.</p>
             </div>
             <div class="modal-body">
-                <!-- Simulador de Google Calendar o Iframe -->
-                <div id="calendar-container" class="calendar-placeholder">
-                    <div class="calendar-mock-header">
-                        <span>Febrero 2026</span>
-                        <div class="cal-nav"><span>
-                                << /span> <span>></span></div>
-                    </div>
-                    <div class="calendar-mock-grid">
-                        <div class="cal-day">L</div>
-                        <div class="cal-day">M</div>
-                        <div class="cal-day">M</div>
-                        <div class="cal-day">J</div>
-                        <div class="cal-day">V</div>
-                        <div class="cal-day">S</div>
-                        <div class="cal-day">D</div>
-                        <!-- ... Days -->
-                        <div class="cal-date muted">26</div>
-                        <div class="cal-date muted">27</div>
-                        <div class="cal-date muted">28</div>
-                        <div class="cal-date muted">29</div>
-                        <div class="cal-date muted">30</div>
-                        <div class="cal-date muted">31</div>
-                        <div class="cal-date">1</div>
-                        <div class="cal-date">2</div>
-                        <div class="cal-date">3</div>
-                        <div class="cal-date">4</div>
-                        <div class="cal-date">5</div>
-                        <div class="cal-date">6</div>
-                        <div class="cal-date">7</div>
-                        <div class="cal-date">8</div>
-                        <div class="cal-date active">9</div>
-                        <div class="cal-date">10</div>
-                        <div class="cal-date available">11</div>
-                        <div class="cal-date available">12</div>
-                        <div class="cal-date available">13</div>
-                        <div class="cal-date">14</div>
-                        <div class="cal-date">15</div>
-                    </div>
-                    <div class="time-slots">
-                        <button class="time-btn">09:00 AM</button>
-                        <button class="time-btn">11:30 AM</button>
-                        <button class="time-btn">03:00 PM</button>
+                <div id="calendar-wrapper" class="calendar-wrapper">
+                    <div class="iframe-container">
+                        <div class="iframe-placeholder">
+                            <p>Cargando Google Calendar...</p>
+                        </div>
+                        <iframe src="about:blank" style="border: 0" width="100%" height="600" frameborder="0"
+                            scrolling="no" id="google-calendar-iframe"></iframe>
                     </div>
                 </div>
-                <!-- Nota: En un entorno real, aquí iría el iframe de Google Calendar Appointment Schedule -->
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary confirm-booking">Confirmar Cita</button>
             </div>
         </div>
     </div>
