@@ -1,4 +1,95 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. Antigravity Particle System
+    const canvas = document.getElementById('bg-particles');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        const resize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        };
+
+        class Particle {
+            constructor(x, y, dx, dy, size) {
+                this.x = x;
+                this.y = y;
+                this.dx = dx;
+                this.dy = dy;
+                this.size = size;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(57, 255, 20, 0.4)'; // var(--accent) with opacity
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.dx = -this.dx;
+                if (this.y > canvas.height || this.y < 0) this.dy = -this.dy;
+
+                let dist = Math.hypot(mouse.x - this.x, mouse.y - this.y);
+                if (dist < mouse.radius) {
+                    if (mouse.x < this.x && this.x < canvas.width - 10) this.x += 3;
+                    if (mouse.x > this.x && this.x > 10) this.x -= 3;
+                    if (mouse.y < this.y && this.y < canvas.height - 10) this.y += 3;
+                    if (mouse.y > this.y && this.y > 10) this.y -= 3;
+                }
+
+                this.x += this.dx;
+                this.y += this.dy;
+                this.draw();
+            }
+        }
+
+        const init = () => {
+            particles = [];
+            const count = (canvas.width * canvas.height) / 15000;
+            for (let i = 0; i < count; i++) {
+                let size = Math.random() * 2 + 1;
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                let dx = (Math.random() - 0.5) * 0.8;
+                let dy = (Math.random() - 0.5) * 0.8;
+                particles.push(new Particle(x, y, dx, dy, size));
+            }
+        };
+
+        const connect = () => {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i; j < particles.length; j++) {
+                    let d = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+                    if (d < 120) {
+                        ctx.strokeStyle = `rgba(57, 255, 20, ${1 - d / 120})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        };
+
+        const animate = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => p.update());
+            connect();
+            requestAnimationFrame(animate);
+        };
+
+        window.addEventListener('resize', resize);
+        resize();
+        animate();
+    }
+
     // 1. Reveal Animations on Scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
