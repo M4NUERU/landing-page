@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODULR ERP | Autoridad Técnica, Creatividad Humana</title>
+    <meta name="description"
+        content="Software ERP modular de próxima generación. Minimalismo estratégico, IA adaptativa y rendimiento extremo.">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dark-mode">
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">MODULR.</div>
+            <div class="nav-links">
+                <a href="#experiencia">Experiencia</a>
+                <a href="#tecnologia">Tecnología</a>
+                <a href="#comunidad">Comunidad</a>
+            </div>
+            <button class="btn btn-primary">Agendar Demo</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero container">
+            <div class="hero-content">
+                <h1 class="hero-title reveal">Gestiona tu Empresa con <span class="text-accent">Precisión Modular</span>
+                    y
+                    Creatividad Humana</h1>
+                <p class="hero-subtitle reveal">El ERP que proyecta autoridad técnica y se adapta al ritmo de tu
+                    industria
+                    con IA personalizada.</p>
+                <div class="hero-ctas reveal">
+                    <button class="btn btn-primary btn-lg">Empezar Ahora</button>
+                    <button class="btn btn-secondary btn-lg">Ver Todas las Apps</button>
+                </div>
+                <div class="hero-visual-decor reveal">
+                    <div class="decor-card"></div>
+                    <div class="decor-card"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Apps Grid Section (Odoo Inspired) -->
+        <section id="apps" class="apps-grid-section container">
+            <div class="section-badge">Suite Completa e Integrada</div>
+            <h2 class="section-title">Una app para cada <br>necesidad.</h2>
+            <div class="apps-container">
+                <div class="app-item reveal">
+                    <div class="app-icon">📊</div>
+                    <h3>Contabilidad</h3>
+                    <p>Finanzas inteligentes en tiempo real.</p>
+                </div>
+                <div class="app-item reveal">
+                    <div class="app-icon">🤝</div>
+                    <h3>CRM</h3>
+                    <p>Relaciones que impulsan el crecimiento.</p>
+                </div>
+                <div class="app-item reveal">
+                    <div class="app-icon">📦</div>
+                    <h3>Inventario</h3>
+                    <p>Control total de stock y logística.</p>
+                </div>
+                <div class="app-item reveal">
+                    <div class="app-icon">🛒</div>
+                    <h3>Ventas</h3>
+                    <p>Del pedido al pago en segundos.</p>
+                </div>
+                <div class="app-item reveal">
+                    <div class="app-icon">⚙️</div>
+                    <h3>Manufactura</h3>
+                    <p>Optimización de líneas de producción.</p>
+                </div>
+                <div class="app-item reveal">
+                    <div class="app-icon">👤</div>
+                    <h3>RRHH</h3>
+                    <p>Gestiona el talento con humanidad.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof Bar -->
+        <section class="social-proof">
+            <div class="marquee">
+                <div class="marquee-content logo-marquee">
+                    <div class="company-logo">MODERN·TECH</div>
+                    <div class="company-logo">FUTURE·FLOW</div>
+                    <div class="company-logo">NEXUS·CORP</div>
+                    <div class="company-logo">QUANTUM·SYS</div>
+                    <div class="company-logo">DELTA·LOGIC</div>
+                    <!-- Repeat for smooth loop -->
+                    <div class="company-logo">MODERN·TECH</div>
+                    <div class="company-logo">FUTURE·FLOW</div>
+                    <div class="company-logo">NEXUS·CORP</div>
+                    <div class="company-logo">QUANTUM·SYS</div>
+                    <div class="company-logo">DELTA·LOGIC</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Sandbox -->
+        <section id="experiencia" class="sandbox-section container">
+            <div class="section-badge">Experiencia de 'Caja de Arena'</div>
+            <h2 class="section-title">Tu industria, <br>tu interfaz.</h2>
+            <div class="sandbox-container reveal">
+                <div class="sandbox-sidebar">
+                    <button class="sandbox-tab active" data-tab="finanzas">Finanzas</button>
+                    <button class="sandbox-tab" data-tab="inventario">Inventario</button>
+                    <button class="sandbox-tab" data-tab="manufactura">Manufactura</button>
+                </div>
+                <div class="sandbox-view">
+                    <!-- Dynamic content via JS -->
+                    <div id="sandbox-content" class="sandbox-mock-ui">
+                        <div class="mock-header">
+                            <div class="mock-dot"></div>
+                            <div class="mock-dot"></div>
+                            <div class="mock-dot"></div>
+                        </div>
+                        <div class="mock-body">
+                            <!-- Visuals will be added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NLP Conversational UI -->
+        <section id="tecnologia" class="nlp-section container">
+            <div class="nlp-card reveal">
+                <div class="nlp-header">
+                    <span class="nlp-ai-icon">✨</span>
+                    <h3>Interfaz Conversacional</h3>
+                </div>
+                <div class="nlp-input-wrapper">
+                    <input type="text" id="nlp-input"
+                        placeholder="Pregunta: '¿Cómo manejamos los inventarios en tiempo real?'">
+                    <button id="nlp-search">Consultar</button>
+                </div>
+                <div id="nlp-response" class="nlp-response-area">
+                    <p class="placeholder-text">Escribe tu pregunta para generar una vista curada instantáneamente...
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Booking Section -->
+        <section id="contacto" class="contact-section container">
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="section-badge">El Futuro es Hoy</div>
+                    <h2 class="section-title">Escale su negocio <br>con <span class="text-accent">MODULR</span>.</h2>
+                    <p class="contact-description">Únase a las empresas que están redefiniendo la eficiencia operativa
+                        con nuestra tecnología modular e IA adaptativa.</p>
+                    <div class="contact-stats">
+                        <div class="mini-stat">
+                            <span class="stat-value">30%</span>
+                            <span class="stat-label">Más Eficiencia</span>
+                        </div>
+                        <div class="mini-stat">
+                            <span class="stat-value">24/7</span>
+                            <span class="stat-label">Soporte IA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-cta-box reveal">
+                    <div class="glass-form-card">
+                        <h3>¿Listo para la transformación?</h3>
+                        <p>Agende una sesión estratégica con nuestros expertos.</p>
+                        <button class="btn btn-primary btn-block open-booking">Agendar Demo vía Google Calendar</button>
+                        <p class="form-note">Sin compromisos. Sesión técnica de 15 min.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content glassmorphism">
+            <button class="close-modal">&times;</button>
+            <div class="modal-header">
+                <h2>Agendar Sesión estratégica</h2>
+                <p>Seleccione el horario que mejor se adapte a su equipo en nuestro Google Calendar.</p>
+            </div>
+            <div class="modal-body">
+                <!-- Simulador de Google Calendar o Iframe -->
+                <div id="calendar-container" class="calendar-placeholder">
+                    <div class="calendar-mock-header">
+                        <span>Febrero 2026</span>
+                        <div class="cal-nav"><span>
+                                << /span> <span>></span></div>
+                    </div>
+                    <div class="calendar-mock-grid">
+                        <div class="cal-day">L</div>
+                        <div class="cal-day">M</div>
+                        <div class="cal-day">M</div>
+                        <div class="cal-day">J</div>
+                        <div class="cal-day">V</div>
+                        <div class="cal-day">S</div>
+                        <div class="cal-day">D</div>
+                        <!-- ... Days -->
+                        <div class="cal-date muted">26</div>
+                        <div class="cal-date muted">27</div>
+                        <div class="cal-date muted">28</div>
+                        <div class="cal-date muted">29</div>
+                        <div class="cal-date muted">30</div>
+                        <div class="cal-date muted">31</div>
+                        <div class="cal-date">1</div>
+                        <div class="cal-date">2</div>
+                        <div class="cal-date">3</div>
+                        <div class="cal-date">4</div>
+                        <div class="cal-date">5</div>
+                        <div class="cal-date">6</div>
+                        <div class="cal-date">7</div>
+                        <div class="cal-date">8</div>
+                        <div class="cal-date active">9</div>
+                        <div class="cal-date">10</div>
+                        <div class="cal-date available">11</div>
+                        <div class="cal-date available">12</div>
+                        <div class="cal-date available">13</div>
+                        <div class="cal-date">14</div>
+                        <div class="cal-date">15</div>
+                    </div>
+                    <div class="time-slots">
+                        <button class="time-btn">09:00 AM</button>
+                        <button class="time-btn">11:30 AM</button>
+                        <button class="time-btn">03:00 PM</button>
+                    </div>
+                </div>
+                <!-- Nota: En un entorno real, aquí iría el iframe de Google Calendar Appointment Schedule -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary confirm-booking">Confirmar Cita</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">MODULR.</div>
+                <p>Construyendo el futuro de la gestión empresarial.</p>
+            </div>
+            <div class="footer-stats">
+                <div class="stat-item">
+                    <h4>Velocidad</h4>
+                    <p>LCP < 2.5s</p>
+                </div>
+                <div class="stat-item">
+                    <h4>Seguridad</h4>
+                    <p>AES-256</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
