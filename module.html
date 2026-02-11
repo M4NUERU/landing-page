@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODULR ERP | Detalle del Módulo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@700;800&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .module-page-content {
+            padding-top: 10rem;
+            min-height: 100vh;
+            position: relative;
+            z-index: 2;
+            background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.03) 0%, transparent 40%);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 1rem;
+        }
+
+        .module-info h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .module-description {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+        }
+
+        .feature-item::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .video-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            aspect-ratio: 16/9;
+            box-shadow: 0 0 50px var(--accent-glow);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 968px) {
+            .module-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+    <canvas id="bg-particles"></canvas>
+
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">MODULR.</div>
+            <button class="btn btn-primary" onclick="window.close()">Cerrar Pestaña</button>
+        </nav>
+    </header>
+
+    <main class="module-page-content container">
+        <a href="index.html" class="back-btn">← Volver al Ecosistema</a>
+
+        <div class="module-grid">
+            <div class="module-info reveal">
+                <div class="section-badge" id="module-badge">Detalle Técnico</div>
+                <h1 id="module-title-h1">--</h1>
+                <p class="module-description" id="module-desc-p">--</p>
+                <div class="feature-list" id="feature-list-div">
+                    <!-- Features will be injected here -->
+                </div>
+            </div>
+
+            <div class="module-visual reveal">
+                <div class="video-container glassmorphism">
+                    <iframe id="module-video-iframe" src="" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="module-data.js"></script>
+    <script src="module.js"></script>
+</body>
+
+</html>

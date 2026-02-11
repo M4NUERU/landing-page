@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(57, 255, 20, 0.4)'; // var(--accent) with opacity
+                ctx.fillStyle = 'rgba(212, 175, 55, 0.4)'; // var(--accent) Gold with opacity
                 ctx.fill();
             }
             update() {
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 for (let j = i; j < particles.length; j++) {
                     let d = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
                     if (d < 120) {
-                        ctx.strokeStyle = `rgba(57, 255, 20, ${1 - d / 120})`;
+                        ctx.strokeStyle = `rgba(212, 175, 55, ${1 - d / 120})`;
                         ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
