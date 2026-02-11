@@ -30,6 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Re-initialize Background Particles (Copied from app.js logic to maintain aesthetic)
     initBackground();
 
+    // 4. Scroll Reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // 5. Mobile Menu Toggle
