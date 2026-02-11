@@ -244,6 +244,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === bookingModal) toggleModal(false);
     });
 
+    // 4. Mobile Menu Toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navLinksContainer = document.querySelector('.nav-links');
+
+    if (mobileMenuToggle && navLinksContainer) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navLinksContainer.classList.toggle('active');
+            document.body.style.overflow = navLinksContainer.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Close menu when clicking a link
+        navLinksContainer.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navLinksContainer.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    }
+
     confirmBookingBtn.addEventListener('click', () => {
         const modalBody = document.querySelector('.modal-body');
         const modalFooter = document.querySelector('.modal-footer');

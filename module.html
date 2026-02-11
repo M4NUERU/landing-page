@@ -91,8 +91,17 @@
         }
 
         @media (max-width: 968px) {
+            .module-page-content {
+                padding-top: 8rem;
+            }
+
             .module-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .module-info h1 {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -104,7 +113,19 @@
     <header class="header">
         <nav class="nav container">
             <div class="logo" onclick="location.href='index.html'" style="cursor: pointer;">MODULR.</div>
-            <button class="btn btn-primary" onclick="window.close()">Cerrar Pestaña</button>
+            <div class="nav-links">
+                <a href="index.html#experiencia">Experiencia</a>
+                <a href="index.html#tecnologia">Tecnología</a>
+                <a href="index.html#comunidad">Comunidad</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-primary demo-btn" onclick="window.close()">Cerrar</button>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Abrir menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </nav>
     </header>
 

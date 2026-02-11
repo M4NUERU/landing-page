@@ -30,14 +30,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Re-initialize Background Particles (Copied from app.js logic to maintain aesthetic)
     initBackground();
 
-    // 4. Scroll Reveal
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-    }, { threshold: 0.1 });
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 5. Mobile Menu Toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navLinksContainer = document.querySelector('.nav-links');
+
+    if (mobileMenuToggle && navLinksContainer) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navLinksContainer.classList.toggle('active');
+            document.body.style.overflow = navLinksContainer.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Close menu when clicking a link
+        navLinksContainer.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navLinksContainer.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    }
 });
 
 function initBackground() {
