@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas) {
         const ctx = canvas.getContext('2d');
         let points = [];
+        let signals = [];
         const mouse = { x: -100, y: -100, radius: 250 };
 
         window.addEventListener('mousemove', (e) => {
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const init = () => {
             points = [];
+            signals = [];
             const spacing = 100;
             for (let x = 0; x < canvas.width + spacing; x += spacing) {
                 for (let y = 0; y < canvas.height + spacing; y += spacing) {
@@ -30,14 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
                         vx: 0,
                         vy: 0,
                         pulse: Math.random() * Math.PI,
-                        size: Math.random() * 1.5 + 0.5
+                        size: Math.random() * 1.5 + 0.5,
+                        active: 0
                     });
                 }
             }
         };
 
+        const createSignal = () => {
+            if (points.length < 1) return;
+            const startIdx = Math.floor(Math.random() * points.length);
+            signals.push({
+                curr: startIdx,
+                life: 1.0,
+                speed: 0.02
+            });
+        };
+
         const draw = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (Math.random() < 0.05) createSignal();
 
             points.forEach((p, i) => {
                 p.pulse += 0.02;
@@ -61,21 +76,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 p.x += p.vx + shiftX * 0.1;
                 p.y += p.vy + shiftY * 0.1;
 
+                p.active *= 0.94;
+
+                const colSize = Math.ceil((canvas.height + 100) / 100);
                 const neighbors = [
                     points[i + 1],
-                    points[i + Math.ceil((canvas.height + 100) / 100)]
+                    points[i + colSize]
                 ];
 
                 neighbors.forEach(n => {
                     if (n && Math.abs(p.originX - n.originX) <= 100 && Math.abs(p.originY - n.originY) <= 100) {
                         const d = Math.hypot(p.x - n.x, p.y - n.y);
                         if (d < 150) {
-                            let opacity = 0.03;
+                            let opacity = 0.03 + (p.active * 0.15);
                             if (dist < mouse.radius) {
-                                opacity = (1 - dist / mouse.radius) * 0.2;
+                                opacity = (1 - dist / mouse.radius) * 0.2 + (p.active * 0.15);
                             }
                             ctx.strokeStyle = `rgba(212, 175, 55, ${opacity})`;
-                            ctx.lineWidth = opacity * 10;
+                            ctx.lineWidth = opacity * 8;
                             ctx.beginPath();
                             ctx.moveTo(p.x, p.y);
                             ctx.lineTo(n.x, n.y);
@@ -84,14 +102,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                let nodeOpacity = 0.05;
+                let nodeOpacity = 0.05 + p.active * 0.5;
                 if (dist < mouse.radius) {
-                    nodeOpacity = (1 - dist / mouse.radius) * 0.6;
+                    nodeOpacity = (1 - dist / mouse.radius) * 0.6 + p.active * 0.5;
                 }
                 ctx.fillStyle = `rgba(212, 175, 55, ${nodeOpacity})`;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size + (nodeOpacity * 2), 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, p.size + (nodeOpacity * 2.5), 0, Math.PI * 2);
                 ctx.fill();
+            });
+
+            signals = signals.filter(s => {
+                s.life -= s.speed;
+                if (s.life <= 0) return false;
+                const p = points[s.curr];
+                if (p) p.active = s.life;
+                if (Math.random() < 0.15) {
+                    const colSize = Math.ceil((canvas.height + 100) / 100);
+                    const possible = [s.curr + 1, s.curr - 1, s.curr + colSize, s.curr - colSize];
+                    const next = possible[Math.floor(Math.random() * possible.length)];
+                    if (points[next]) s.curr = next;
+                }
+                return true;
             });
 
             requestAnimationFrame(draw);
