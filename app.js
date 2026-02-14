@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const ctx = canvas.getContext('2d');
         let points = [];
         let signals = [];
+        let floatingShapes = [];
+        let explosions = [];
         const mouse = { x: -100, y: -100, radius: 250 };
 
         window.addEventListener('mousemove', (e) => {
@@ -21,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const init = () => {
             points = [];
             signals = [];
+            floatingShapes = [];
+            explosions = [];
             const spacing = 100;
             for (let x = 0; x < canvas.width + spacing; x += spacing) {
                 for (let y = 0; y < canvas.height + spacing; y += spacing) {
@@ -37,6 +41,63 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             }
+            // Spawn initial storytelling shapes
+            for (let i = 0; i < 6; i++) spawnShape(true);
+        };
+
+        const spawnShape = (randomX = false) => {
+            floatingShapes.push({
+                x: randomX ? Math.random() * canvas.width : -100,
+                y: Math.random() * canvas.height,
+                size: 25 + Math.random() * 35,
+                speed: 0.15 + Math.random() * 0.4,
+                type: Math.floor(Math.random() * 3), // 0: Hex, 1: Diamond, 2: Pulse
+                rot: Math.random() * Math.PI * 2,
+                rotSpeed: (Math.random() - 0.5) * 0.015
+            });
+        };
+
+        const createExplosion = (x, y) => {
+            for (let i = 0; i < 15; i++) {
+                explosions.push({
+                    x, y,
+                    vx: (Math.random() - 0.5) * 10,
+                    vy: (Math.random() - 0.5) * 10,
+                    life: 1.0,
+                    size: Math.random() * 4 + 1
+                });
+            }
+        };
+
+        const drawShape = (s) => {
+            ctx.strokeStyle = 'rgba(212, 175, 55, 0.5)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.save();
+            ctx.translate(s.x, s.y);
+            ctx.rotate(s.rot);
+
+            if (s.type === 0) { // Hexagon (Node)
+                for (let i = 0; i < 6; i++) {
+                    const angle = (i * Math.PI) / 3;
+                    const x = Math.cos(angle) * s.size;
+                    const y = Math.sin(angle) * s.size;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+            } else if (s.type === 1) { // Diamond (Connection)
+                ctx.moveTo(0, -s.size);
+                ctx.lineTo(s.size * 0.8, 0);
+                ctx.lineTo(0, s.size);
+                ctx.lineTo(-s.size * 0.8, 0);
+                ctx.closePath();
+            } else { // Circle (Pulse)
+                ctx.arc(0, 0, s.size * 0.6, 0, Math.PI * 2);
+            }
+
+            ctx.stroke();
+            ctx.restore();
         };
 
         const createSignal = () => {
@@ -112,6 +173,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fill();
             });
 
+            // Draw & Update Floating Shapes
+            floatingShapes.forEach((s, index) => {
+                s.x += s.speed;
+                s.rot += s.rotSpeed;
+                drawShape(s);
+                if (s.x > canvas.width + 100) {
+                    floatingShapes.splice(index, 1);
+                    spawnShape(); // Respawn from left
+                }
+            });
+
+            // Draw & Update Explosions
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.8)';
+            explosions = explosions.filter(exp => {
+                exp.x += exp.vx;
+                exp.y += exp.vy;
+                exp.vx *= 0.96;
+                exp.vy *= 0.96;
+                exp.life -= 0.02;
+                if (exp.life <= 0) return false;
+                ctx.globalAlpha = exp.life;
+                ctx.beginPath();
+                ctx.arc(exp.x, exp.y, exp.size * exp.life, 0, Math.PI * 2);
+                ctx.fill();
+                return true;
+            });
+            ctx.globalAlpha = 1.0;
+
             signals = signals.filter(s => {
                 s.life -= s.speed;
                 if (s.life <= 0) return false;
@@ -128,6 +217,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             requestAnimationFrame(draw);
         };
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            for (let i = floatingShapes.length - 1; i >= 0; i--) {
+                const s = floatingShapes[i];
+                const dist = Math.hypot(s.x - mouseX, s.y - mouseY);
+                if (dist < s.size) {
+                    createExplosion(s.x, s.y);
+                    floatingShapes.splice(i, 1);
+                    spawnShape(); // Spawn from left
+                    break; // One click, one explosion
+                }
+            }
+        });
 
         window.addEventListener('resize', resize);
         resize();

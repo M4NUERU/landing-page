@@ -59,7 +59,8 @@ h3,
     width: 100%;
     height: 100%;
     z-index: 1;
-    pointer-events: none;
+    pointer-events: auto;
+    /* Allow interaction with shapes */
     background: transparent;
 }
 
@@ -252,61 +253,6 @@ h3,
     margin-bottom: 4rem;
     position: relative;
     z-index: 2;
-}
-
-.hero-visual-decor {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.decor-card {
-    position: absolute;
-    width: 200px;
-    height: 120px;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    backdrop-filter: blur(5px);
-    animation: float 6s infinite ease-in-out;
-}
-
-.decor-card:nth-child(1) {
-    top: 10%;
-    left: 5%;
-    transform: rotate(-10deg);
-}
-
-.decor-card:nth-child(2) {
-    bottom: 20%;
-    right: 5%;
-    transform: rotate(15deg);
-    animation-delay: -3s;
-}
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translate(0, 0) rotate(var(--rot));
-    }
-
-    50% {
-        transform: translate(0, -20px) rotate(var(--rot));
-    }
-}
-
-.decor-card:nth-child(1) {
-    --rot: -10deg;
-}
-
-.decor-card:nth-child(2) {
-    --rot: 15deg;
 }
 
 .trust-pill {
