@@ -549,7 +549,31 @@ body {
 }
 
 .pupil {
-    transition: transform 0.1s ease-out;
+    transition: transform 0.1s ease-out, r 0.2s ease;
+}
+
+/* Mascot States */
+.mascot-ixti.surprised .pupil {
+    r: 7;
+    /* Wide eyes */
+}
+
+.mascot-ixti.blinking .pupil {
+    transform: scaleY(0.1);
+}
+
+.mascot-ixti.surprised .antenna-glow {
+    animation: antennaPulse 0.5s infinite alternate;
+}
+
+@keyframes antennaPulse {
+    from {
+        filter: drop-shadow(0 0 2px var(--accent));
+    }
+
+    to {
+        filter: drop-shadow(0 0 8px var(--accent));
+    }
 }
 
 .chat-badge {
