@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MODULR ERP | Autoridad Técnica, Creatividad Humana</title>
+    <title>IXTA | Tejido Digital, Precisión de Datos</title>
     <meta name="description"
         content="Software ERP modular de próxima generación. Minimalismo estratégico, IA adaptativa y rendimiento extremo.">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@700;800&family=Outfit:wght@300;400;600;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lora:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +21,7 @@
     <canvas id="bg-particles"></canvas>
     <header class="header">
         <nav class="nav container">
-            <div class="logo">MODULR.</div>
+            <div class="logo">IXTA</div>
             <div class="nav-links">
                 <a href="#experiencia">Experiencia</a>
                 <a href="#tecnologia">Tecnología</a>
@@ -42,12 +42,10 @@
         <!-- Hero Section -->
         <section class="hero container">
             <div class="hero-content">
-                <h1 class="hero-title reveal">Gestiona tu Empresa con <span class="text-accent">Precisión Modular</span>
-                    y
-                    Creatividad Humana</h1>
-                <p class="hero-subtitle reveal">El ERP que proyecta autoridad técnica y se adapta al ritmo de tu
-                    industria
-                    con IA personalizada.</p>
+                <h1 class="hero-title reveal">Tejemos el futuro de tu empresa sobre la <span class="text-accent">fuerza
+                        de tus raíces.</span></h1>
+                <p class="hero-subtitle reveal">El ERP que integra cada hilo de tu negocio con la precisión de la fibra
+                    óptica y la confianza de nuestra tierra.</p>
                 <div class="hero-ctas reveal">
                     <button class="btn btn-primary btn-lg">Empezar Ahora</button>
                     <button class="btn btn-secondary btn-lg">Ver Todas las Apps</button>
@@ -66,21 +64,21 @@
             <div class="apps-container">
                 <div class="app-item reveal" onclick="window.open('module.html?id=contabilidad', '_blank')"
                     style="cursor: pointer;">
-                    <div class="app-icon">📊</div>
-                    <h3>Contabilidad</h3>
-                    <p>Finanzas inteligentes en tiempo real.</p>
+                    <div class="app-icon">🕸️</div>
+                    <h3>La Trama</h3>
+                    <p>Donde los números se entrelazan sin error.</p>
                 </div>
                 <div class="app-item reveal" onclick="window.open('module.html?id=crm', '_blank')"
                     style="cursor: pointer;">
-                    <div class="app-icon">🤝</div>
-                    <h3>CRM</h3>
-                    <p>Relaciones que impulsan el crecimiento.</p>
+                    <div class="app-icon">🔗</div>
+                    <h3>El Vínculo</h3>
+                    <p>La conexión tecnológica con tus clientes.</p>
                 </div>
                 <div class="app-item reveal" onclick="window.open('module.html?id=inventario', '_blank')"
                     style="cursor: pointer;">
-                    <div class="app-icon">📦</div>
-                    <h3>Inventario</h3>
-                    <p>Control total de stock y logística.</p>
+                    <div class="app-icon">🧺</div>
+                    <h3>El Acopio</h3>
+                    <p>Donde todo se guarda con orden y tradición.</p>
                 </div>
                 <div class="app-item reveal" onclick="window.open('module.html?id=ventas', '_blank')"
                     style="cursor: pointer;">
@@ -151,20 +149,40 @@
         <!-- Floating Chat Widget -->
         <div id="chat-widget" class="chat-widget">
             <button id="chat-toggle" class="chat-toggle">
-                <span class="chat-icon">✨</span>
+                <div class="mascot-container">
+                    <svg class="mascot-ixti" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Mascot Body (Node-like) -->
+                        <circle cx="50" cy="50" r="40" fill="var(--bg-card)" stroke="var(--accent)" stroke-width="2" />
+                        <!-- Antenna/Link -->
+                        <line x1="50" y1="10" x2="50" y2="20" stroke="var(--accent)" stroke-width="2" />
+                        <circle cx="50" cy="10" r="4" fill="var(--accent)" />
+                        <!-- Eyes Area -->
+                        <g class="eyes">
+                            <!-- Left Eye -->
+                            <circle cx="35" cy="45" r="8" fill="white" />
+                            <circle class="pupil left-pupil" cx="35" cy="45" r="4" fill="black" />
+                            <!-- Right Eye -->
+                            <circle cx="65" cy="45" r="8" fill="white" />
+                            <circle class="pupil right-pupil" cx="65" cy="45" r="4" fill="black" />
+                        </g>
+                        <!-- Smile -->
+                        <path d="M 35 65 Q 50 75 65 65" fill="none" stroke="var(--accent)" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </div>
                 <span class="chat-badge">1</span>
             </button>
             <div id="chat-window" class="chat-window glassmorphism">
                 <div class="chat-header">
                     <div class="chat-ai-status">
                         <span class="status-dot"></span>
-                        <strong>MODULR IA</strong>
+                        <strong>IXTA IA</strong>
                     </div>
                     <button id="close-chat">&times;</button>
                 </div>
                 <div id="chat-messages" class="chat-messages">
                     <div class="message ai">
-                        ¡Hola! Soy el asistente inteligente de MODULR. ¿En qué puedo ayudarte hoy con tu gestión
+                        ¡Hola! Soy el asistente inteligente de IXTA. ¿En qué puedo ayudarte hoy con tu gestión
                         empresarial?
                     </div>
                 </div>
@@ -180,7 +198,7 @@
             <div class="contact-grid">
                 <div class="contact-info reveal">
                     <div class="section-badge">El Futuro es Hoy</div>
-                    <h2 class="section-title">Escale su negocio <br>con <span class="text-accent">MODULR</span>.</h2>
+                    <h2 class="section-title">Escale su negocio <br>con <span class="text-accent">IXTA</span>.</h2>
                     <p class="contact-description">Únase a las empresas que están redefiniendo la eficiencia operativa
                         con nuestra tecnología modular e IA adaptativa.</p>
                     <div class="contact-stats">
@@ -231,7 +249,7 @@
     <footer class="footer container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <div class="logo">MODULR.</div>
+                <div class="logo">IXTA</div>
                 <p>Construyendo el futuro de la gestión empresarial.</p>
             </div>
             <div class="footer-stats">
