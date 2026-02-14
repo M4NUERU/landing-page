@@ -107,14 +107,28 @@ function initBackground() {
     };
 
     const spawnShape = (randomX = false) => {
+        const side = Math.floor(Math.random() * 4); // 0: Top, 1: Right, 2: Bottom, 3: Left
+        let x, y, vx, vy;
+        const speed = 0.05 + Math.random() * 0.15; // Much slower
+
+        if (side === 0) { // Top
+            x = Math.random() * canvas.width; y = -50; vx = (Math.random() - 0.5) * speed; vy = speed;
+        } else if (side === 1) { // Right
+            x = canvas.width + 50; y = Math.random() * canvas.height; vx = -speed; vy = (Math.random() - 0.5) * speed;
+        } else if (side === 2) { // Bottom
+            x = Math.random() * canvas.width; y = canvas.height + 50; vx = (Math.random() - 0.5) * speed; vy = -speed;
+        } else { // Left
+            x = -50; y = Math.random() * canvas.height; vx = speed; vy = (Math.random() - 0.5) * speed;
+        }
+
         floatingShapes.push({
-            x: randomX ? Math.random() * canvas.width : -100,
-            y: Math.random() * canvas.height,
-            size: 25 + Math.random() * 35,
-            speed: 0.15 + Math.random() * 0.4,
-            type: Math.floor(Math.random() * 3), // 0: Hex, 1: Diamond, 2: Pulse
+            x: randomX ? Math.random() * canvas.width : x,
+            y: randomX ? Math.random() * canvas.height : y,
+            vx, vy,
+            size: 15 + Math.random() * 45, // Varied sizes
+            type: Math.floor(Math.random() * 3),
             rot: Math.random() * Math.PI * 2,
-            rotSpeed: (Math.random() - 0.5) * 0.015
+            rotSpeed: (Math.random() - 0.5) * 0.01
         });
     };
 
@@ -225,10 +239,12 @@ function initBackground() {
             ctx.fill();
         });
 
-        // Shapes & Explosions Rendering
+        // Omni-directional Shapes Rendering
         floatingShapes.forEach((s, ix) => {
-            s.x += s.speed; s.rot += s.rotSpeed; drawShape(s);
-            if (s.x > canvas.width + 100) { floatingShapes.splice(ix, 1); spawnShape(); }
+            s.x += s.vx; s.y += s.vy; s.rot += s.rotSpeed; drawShape(s);
+            if (s.x > canvas.width + 150 || s.x < -150 || s.y > canvas.height + 150 || s.y < -150) {
+                floatingShapes.splice(ix, 1); spawnShape();
+            }
         });
 
         ctx.fillStyle = 'rgba(212, 175, 55, 0.8)';
@@ -272,4 +288,19 @@ function initBackground() {
     window.addEventListener('resize', resize);
     resize();
     draw();
+
+    // Mascot Logic in Module Page
+    const mascotSvg = document.querySelector('.mascot-ixti');
+    if (mascotSvg) {
+        setInterval(() => {
+            mascotSvg.classList.add('blinking');
+            setTimeout(() => mascotSvg.classList.remove('blinking'), 150);
+        }, 4000 + Math.random() * 3000);
+
+        const triggers = document.querySelectorAll('.btn, .chat-toggle, .logo');
+        triggers.forEach(el => {
+            el.addEventListener('mouseenter', () => mascotSvg.classList.add('surprised'));
+            el.addEventListener('mouseleave', () => mascotSvg.classList.remove('surprised'));
+        });
+    }
 }
